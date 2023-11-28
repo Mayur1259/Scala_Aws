@@ -1,0 +1,285 @@
+28/11/2023 -
+
+1) Write a Scala function to calculate the factorial of a given number.
+
+Sol)
+import scala.io.StdIn.readInt
+
+object Demo {
+
+  def fact(n : Int) : Long = {
+    if(n == 0 || n == 1)
+      1
+    else
+      n*fact(n-1);
+  }
+
+  def main (args : Array[String]): Unit = {
+    println("Enter a number : ");
+    val n = readInt();
+
+    val res = fact(n);
+    println("The factorial of " + n + " is " + res);
+
+  }
+}
+
+
+2) Write a Scala function to check if a given number is prime.
+
+Sol)
+import scala.io.StdIn.readInt
+
+object Demo {
+
+  def PrimeCheck(n : Int) : Boolean = {
+    if(n <= 1)
+      return false;
+
+    if(n == 2)
+      return true;
+
+    for(i <- 2 to n/2){
+      if(n % i == 0)
+        return false;
+    }
+
+    true
+
+  }
+
+  def main (args : Array[String]): Unit = {
+    println("Enter a number to check for prime : ");
+    val n = readInt();
+
+    var res : Boolean = PrimeCheck(n);
+
+    if(res == true)
+      println(n + " is a prime number")
+    else
+      println(n + " is not a prime number")
+  }
+}
+
+
+3) Write a Scala function to calculate the sum of digits in a given number.
+
+Sol)
+import scala.io.StdIn.readInt
+
+object Demo {
+
+  def SumOfDigits(n : Int) : Int = {
+    var sum : Int = 0;
+    var n1 = n;
+    while(n1 != 0){
+      sum += n1%10;
+      n1 /= 10;
+    }
+
+    sum;
+
+  }
+
+  def main (args : Array[String]): Unit = {
+    println("Enter a number : ");
+    val n = readInt();
+
+    var res = SumOfDigits(n);
+    println("Sum of digits of " + n + " is " + res);
+
+  }
+}
+
+
+
+4) Write a Scala function to reverse a given string.
+
+Sol)
+import scala.io.StdIn.readLine
+
+object Demo {
+
+  def ReverseStr(s : String) : String = {
+    s.reverse
+  }
+
+  def main (args : Array[String]): Unit = {
+    println("Enter a String : ");
+    val str = readLine();
+
+    println("Reverse of string " + str + " is " + ReverseStr(str));
+
+  }
+}
+
+
+5) Write a Scala function to calculate the power of a number.
+
+Sol)
+import scala.io.StdIn.readInt
+
+object Demo {
+
+  def CalculatePower(b : Int, e : Int): Long = {
+    var i = 0;
+    var powersum = 1;
+
+    while(i < e){
+      powersum *= b;
+      i += 1;
+    }
+   powersum
+  }
+
+  def main (args : Array[String]): Unit = {
+    println("Enter base number : ");
+    val base : Int = readInt();
+
+    println("Enter exponent : ");
+    val exp : Int = readInt();
+
+    val ans = CalculatePower(base, exp);
+    println(ans);
+
+  }
+}
+
+
+
+6) Write a Scala function to check if a given number is even.
+
+Sol)
+import scala.io.StdIn.readInt
+
+object Main {
+
+  def CheckEven(n : Int) : Boolean = {
+    if(n % 2 == 0)
+      true
+    else
+      false;
+  }
+
+  def main(args: Array[String]): Unit = {
+    println("Enter a number to check for even : ");
+    val n = readInt();
+    if(CheckEven(n))
+      println("Even Number");
+    else
+      println("Not a Even Number");
+  }
+}
+
+
+7) Write a Scala function to find the maximum element in an array.
+
+Sol)
+import scala.io.StdIn.readInt
+
+object Main {
+
+  def MaxEle(arraynum : Array[Int]) : Int = {
+    if(arraynum.isEmpty)
+      -1
+    else {
+      var maxElement = arraynum(0);
+      for(i <- 0 until arraynum.length){
+        if(arraynum(i) > maxElement)
+          maxElement = arraynum(i);
+      }
+      maxElement
+    }
+  }
+
+  def main(args: Array[String]): Unit = {
+    val nums = Array(8, 5, 7, 3, 6);
+    println("Array :");
+
+    for(i <- nums)
+      print(i + " ");
+    println();
+
+    val maxElement = MaxEle(nums);
+    println("Maximum element in Array is " + maxElement);
+
+  }
+}
+
+
+8) Write a Scala function to check if a given string is a palindrome.
+
+Sol)
+
+import scala.io.StdIn.readLine
+
+object Main {
+
+  def checkPalindrome(str: String) : Boolean = {
+    val reverseStr = str.reverse;
+    if(str == reverseStr)
+      true;
+    else
+      false;
+  }
+
+  def main(args: Array[String]): Unit = {
+    println("Enter a string : ");
+    val str = readLine();
+
+    if(checkPalindrome(str))
+      println("String is Palindrome.")
+    else
+      println("String is not Palindrome.");
+  }
+}
+
+
+9) Write a Scala function to check if a given list is sorted in ascending order.
+
+Sol)
+
+object Main {
+
+  def checkSortedOrder(lst : List[Int]) : Boolean = {
+    lst == lst.sorted;
+  }
+
+  def main(args: Array[String]): Unit = {
+     val lst = List(4,2,5,7,9)
+     println(lst);
+
+     if(checkSortedOrder(lst))
+       println("Given list is in Sorted Order.")
+     else
+       println("Given list is not in Sorted Order.")
+  }
+}
+
+
+10) Write a Scala function to check if a given number is a perfect square.
+
+Sol)
+import scala.io.StdIn.readInt
+
+object Main {
+
+  def perfectSquare(num : Int) : Boolean = {
+    var sqrt = math.sqrt(num).toInt
+    if(sqrt * sqrt == num)
+      true
+    else
+      false
+  }
+
+  def main(args: Array[String]): Unit = {
+    println("Enter a number : ")
+    val n = readInt()
+
+    if(perfectSquare(n))
+      println(n + " is a perfect square.")
+    else
+      println(n + " is not a perfect square.")
+
+  }
+}

@@ -1,0 +1,309 @@
+29/11/2023 -
+
+1) Write a function to find greatest of 3 numbers.
+
+Sol)
+import scala.io.StdIn.readInt
+
+object Main {
+
+  def greatestOfThree(x: Int, y: Int, z: Int) : Int = {
+    if(x >= y && x >= z)
+      x
+    else if(y >= x && y >= z)
+      y
+    else
+      z
+  }
+
+  def main(args: Array[String]): Unit = {
+    println("Enter three numbers : ");
+    val a = readInt();
+    val b = readInt();
+    val c = readInt();
+
+    val res = greatestOfThree(a, b, c);
+    println("Greatest Number is " + res);
+
+  }
+}
+
+2) Write a function to find the Fibonacci series for a given number
+
+Sol)
+import scala.io.StdIn.readInt
+
+object Demo {
+
+  def fibb(n : Int) : Int = {
+    if(n == 0)
+      0
+    else if(n == 1)
+      1
+    else
+      fibb(n-1) + fibb(n-2)
+  }
+
+  def main (args : Array[String]): Unit = {
+    println("Enter a number : ");
+    val n = readInt();
+
+    for(i <- 0 until n){
+      print(fibb(i) + " ");
+    }
+
+  }
+}
+
+
+3) Write a function to solve the quadratic equation for real values. Your solution should return a (Double, Double) of the two roots.
+
+Sol)
+import scala.io.StdIn.readInt
+
+object Demo {
+
+  def getRoots(a: Int, b: Int, c: Int) : (Double, Double) = {
+    val d = (b*b) - 4*a*c;
+
+    if(d == 0) {
+      val r = (-b)/(2*a);
+      (r,r)
+    } else {
+      val r1 = (-b + math.sqrt(d))/(2*a);
+      val r2 = (-b - math.sqrt(d))/(2*a);
+      (r1, r2);
+    }
+  }
+
+  def main (args : Array[String]): Unit = {
+    println("Give values of a, b, c to get roots of quadratic equation of form ax^2 + bx + c");
+    val a = readInt();
+    val b = readInt();
+    val c = readInt();
+
+    val(root1, root2) = getRoots(a,b,c);
+    println("Roots of the quadratic equation are : " + root1 + ", " + root2);
+  }
+}
+
+
+4) Write a set of functions to do the following operations on a 2-tuples of Int as if they were the numerator and denominator of rational numbers. 
+(a) Addition (b) Subtraction (c) Multiplication (d) Division 
+For example, the function for addition might start off as def add(n1:(Int, Int), n2:(Int, Int)):(Int, Int).
+
+Sol)
+import scala.io.StdIn.readInt
+
+object demo {
+
+  def add(n1: (Int, Int), n2: (Int, Int)): (Int, Int) = {
+    ((n1._1 * n2._2) + (n1._2 * n2._1), n1._2 * n2._2);
+  }
+
+  def subtract(n1: (Int, Int), n2: (Int, Int)): (Int, Int) = {
+    ((n1._1 * n2._2) - (n1._2 * n2._1), n1._2 * n2._2);
+  }
+
+  def multiply(n1: (Int, Int), n2: (Int, Int)): (Int, Int) = {
+    (n1._1 * n2._1, n1._2 * n2._2);
+  }
+
+  def divide(n1: (Int, Int), n2: (Int, Int)): (Int, Int) = {
+    (n1._1 * n2._2, n1._2 * n2._1);
+  }
+
+  def main(args : Array[String]): Unit = {
+    println("Enter numerator and denominator for 1st fraction : ");
+    val n1 = readInt();
+    val d1 = readInt();
+    val(num1, den1) = (n1, d1);
+
+    println("Enter numerator and denominator for 2nd fraction : ");
+    val n2 = readInt();
+    val d2 = readInt();
+    val(num2, den2) = (n2, d2);
+
+    println("Adding n1 and n2 : " + add((num1, den1), (num2, den2)));
+    println("Subtracting n1 and n2 : " + subtract((num1, den1), (num2, den2)));
+    println("Multiplying n1 and n2 : " + multiply((num1, den1), (num2, den2)));
+    println("Dividing n1 and n2 : " + divide((num1, den1), (num2, den2)));
+
+  }
+}
+
+
+5) Write a Scala program that creates a class called Person with properties like name, age and country. Implement methods to get and set properties.
+
+Sol)
+class Person(var name : String, var age : Int, var country : String) {
+  def getName : String = name;
+
+  def setName(newName : String) : Unit = {
+    name = newName;
+  }
+
+  def getAge: Int = age;
+
+  def setAge(newAge: Int): Unit = {
+    age = newAge;
+  }
+
+  def getCountry: String = country;
+
+  def setCountry(newCountry: String): Unit = {
+    country = newCountry;
+  }
+
+}
+
+object demo {
+  def main(args : Array[String]): Unit = {
+    val p = new Person("Bob", 22, "India");
+    println("Name : " + p.getName);
+    println("Age : " + p.getAge);
+    println("Country : " + p.getCountry);
+
+    p.setAge(40);
+    println("Revised Age : " + p.getAge);
+
+  }
+}
+
+
+6) Write a Scala program that creates a subclass Student that extends the Person class. Add a property called grade and implement methods to get and set it.
+
+Sol)
+class Person(var name : String, var age : Int, var country : String) {
+  def getName : String = name;
+
+  def setName(newName : String) : Unit = {
+    name = newName;
+  }
+
+  def getAge: Int = age;
+
+  def setAge(newAge: Int): Unit = {
+    age = newAge;
+  }
+
+  def getCountry: String = country;
+
+  def setCountry(newCountry: String): Unit = {
+    country = newCountry;
+  }
+
+}
+
+class Student (name : String, age : Int, country : String, var grade : String) extends Person(name, age, country) {
+   def getGrade : String = grade;
+
+   def setGrade(newGrade : String): Unit = {
+     grade = newGrade;
+   }
+
+}
+
+object demo {
+  def main(args : Array[String]): Unit = {
+    val s = new Student("Bob", 22, "India", "B");
+    println("Name : " + s.getName);
+    println("Age : " + s.getAge);
+    println("Country : " + s.getCountry);
+    println("Grade : " + s.getGrade);
+
+    s.setGrade("A");
+    println("Revised Grade : " + s.getGrade);
+
+  }
+}
+
+
+7) Write a Scala program that creates an abstract class Shape with an abstract method area. 
+   Implement subclasses Rectangle and Circle that override the area method.
+
+Sol)
+abstract class Shape {
+  def area : Double;
+}
+
+class Rectangle (width : Double, height : Double) extends Shape {
+  override def area : Double = width * height;
+}
+
+class Circle(radius : Double) extends Shape {
+  override def area : Double = math.Pi * radius * radius;
+}
+
+object demo {
+  def main(args : Array[String]): Unit = {
+    val r = new Rectangle(10,15);
+    val c = new Circle(5);
+
+    println("Area of Rectangle is : " + r.area);
+    println("Area of Circle is : " + c.area);
+
+  }
+}
+
+
+8) Write a Scala program that creates a class Animal with properties name and sound. Implement a method makeSound that prints the animal's sound.
+
+Sol)
+class Animal(name : String, sound : String) {
+  def makeSound : Unit = {
+    println(name + " produces sound : " + sound);
+  }
+}
+
+object demo {
+  def main(args : Array[String]): Unit = {
+    val a = new Animal("Dog", "Bark");
+    a.makeSound;
+  }
+}
+
+
+9) Write a Scala program that creates a class Triangle with properties side1, side2, and side3. Implement a method isEquilateral to check if the triangle is equilateral.
+
+Sol)
+class Triangle(s1 : Double, s2 : Double, s3 : Double) {
+  def isEquilateral : Boolean = {
+    s1 == s2 && s2 == s3
+  }
+}
+
+object demo {
+  def main(args : Array[String]): Unit = {
+    val eq = new Triangle(4,4,4);
+    if(eq.isEquilateral)
+      println("Triangle is equilateral.")
+    else
+      println("Triangle is not equilateral.")
+  }
+}
+
+
+10) Write a Scala program that creates a class ContactInfo with properties name, email, and address. 
+Create a class Customer that includes a ContactInfo object.
+
+Sol)
+class ContactInfo(val name : String, val email : String, val address : String) {
+
+}
+
+class Customer(val contactInfo: ContactInfo) {
+
+}
+
+object demo {
+  def main(args : Array[String]): Unit = {
+    val c = new ContactInfo("Bob", "xyz@gmail.com", "Mumbai");
+    val cst = new Customer(c);
+
+    println("Name of customer : " + cst.contactInfo.name);
+    println("Email of customer : " + cst.contactInfo.email);
+    println("Address of customer : " + cst.contactInfo.address);
+
+  }
+}

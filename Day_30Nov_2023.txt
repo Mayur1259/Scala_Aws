@@ -1,0 +1,273 @@
+30/11/2023 -
+
+1) Write a Scala program to find all pairs of elements in an array whose sum is equal to a specified number.
+
+Sol)
+import scala.io.StdIn.readInt
+
+object demo {
+
+  def findPairs(a : Array[Int], s : Int) : Unit = {
+    for(i <- 0 until a.length) {
+      for(j <- i+1 until a.length) {
+        if(a(i) + a(j) == s){
+          println(a(i) + ", " + a(j));
+        }
+      }
+    }
+  }
+
+  def main(args : Array[String]): Unit = {
+     val arr = Array(4,2,5,7,3,9);
+     println("Given Array : ");
+     for(i <- arr)
+       print(i + " ");
+     println();
+
+     println("Give sum for which to find pairs : ");
+     val sum = readInt();
+
+     println("Pairs are : ");
+     findPairs(arr, sum);
+
+    }
+}
+
+
+2) Write a Scala program to find maximum product of two integers in a given array of integers and pair.
+
+Example:
+Input:
+nums = { 2, 3, 5, 7, -7, 5, 8, -5 }
+Output:
+Pair is (7, 8), Maximum Product: 56
+
+Sol)
+
+object demo {
+
+  def maxProduct(arr: Array[Int]): Unit = {
+     var maxP = Integer.MIN_VALUE;
+     var p1 = -1;
+     var p2 = -1;
+
+     for(i <- 0 until arr.length){
+       for(j <- i+1 until arr.length){
+         if(maxP < (arr(i) * arr(j))){
+           maxP = arr(i) * arr(j);
+           p1 = i;
+           p2 = j;
+         }
+       }
+     }
+
+    println("Pair : " + arr(p1) + ", " + arr(p2) + ", Max Product : " + maxP);
+
+  }
+
+  def main(args : Array[String]): Unit = {
+    val arr = Array(2, 3, 5, 7, -7, 5, 8, -5);
+    println("Given Array : ");
+    for(i <- arr){
+      print(i + ", ");
+    }
+    println();
+
+    println("Pair in Array having maximum product and max product is : ");
+
+    maxProduct(arr);
+
+  }
+}
+
+
+3) Write a Scala program to remove the duplicate elements of a given sorted array and return the new length of the array.
+
+Sol)
+object demo {
+    def func(arr: Array[Int]): Int = {
+      if (arr.isEmpty) return 0
+
+      var len = 1
+
+      for (i <- 1 until arr.length) {
+        if (arr(i) != arr(i - 1)) {
+          arr(len) = arr(i)
+          len += 1
+        }
+      }
+      len
+    }
+
+  def main(args : Array[String]): Unit = {
+     val arr = Array(2,3,3,5,6,7,7,8);
+     println("Given sorted Array : ");
+     for(i <- arr)
+       print(i + " ");
+     println();
+
+     val len = func(arr);
+     println("Length of array after removing the duplicates is : " + len);
+  }
+}
+
+
+4) Write a Scala program to iterate over a list to print the elements and calculate the sum and product of all elements of this list.
+
+Sol)
+object demo {
+  def main(args : Array[String]): Unit = {
+     val lst : List[Int] = List(1,3,4,2,7);
+     for(i <- lst)
+       print(i + " ");
+     println();
+
+     var sum :Int = 0;
+     for(i <- lst)
+       sum += i;
+
+     var prod = 1;
+     for(i <- lst)
+       prod *= i;
+
+     println("Sum of elements of list : " + sum);
+     println("Product of elements of list : " + prod);
+
+  }
+}
+
+5) Write a Scala program to find the even and odd numbers from a given list.
+
+Sol)
+
+object Scala_List
+{
+  def main(args: Array[String]): Unit =
+  {
+    val lst = List(1,2,3,4,5,6,7,8);
+
+    println("Given list:");
+    println(lst);
+
+    val even = lst.filter(_ % 2 == 0);
+    println("Even numbers from the given list : ");
+    println(even);
+
+    val odd = lst.filter(_ % 2 != 0)
+    println("Odd numbers from the given list : ");
+    println(odd);
+  }
+}
+
+
+6) Write a Scala program to triplicate each element immediately next to the given list of integers.
+
+Sol)
+object Scala_List
+{
+  def main(args: Array[String]): Unit =
+  {
+    val lst = List(1,2,3,4,5);
+
+    println("Given list:");
+    println(lst);
+
+    val triplet = lst.flatMap {
+      n => List(n,n,n)
+    };
+
+    println("List after triplicating each element : ");
+    println(triplet);
+  }
+}
+
+
+7) Write a Scala program to check whether a list contains a sublist.
+
+Sol)
+object Scala_List
+{
+
+  def checkSublist(lst1 : List[Int], lst2 : List[Int]) : Boolean = {
+    if(lst1.diff(lst2).isEmpty)
+      true;
+    else
+      false;
+  }
+
+  def main(args: Array[String]): Unit =
+  {
+    println("Given List : ");
+    val lst : List[Int] = List(4,2,5,7);
+    println(lst);
+
+    println("Given Sublist : ");
+    val subLst : List[Int] = List(2,5);
+    println(subLst);
+
+    val bool = checkSublist(subLst, lst);
+    if(bool)
+      println("Given List contains provided sublist.");
+    else
+      println("Given List doesn't contains sublist.");
+
+  }
+}
+
+
+8) Write a Scala program to count the number of occurrences of each element in a given list.
+
+Sol)
+object Demo {
+  def main(args: Array[String]): Unit = {
+
+    val lst = List(4, 2, 3, 1, 3, 4, 5, 2, 4)
+    println(lst);
+    
+    val ct = lst.groupBy(identity).view.mapValues(_.size);
+
+    ct.foreach {
+      case (element, count) =>
+      println(element + " : " + count + " times.");
+    }
+
+  }
+}
+
+9) Write a Scala program to create a map and find the keys with the maximum value.
+
+Sol)
+object Demo {
+  def main(args: Array[String]): Unit = {
+    val myMap : Map[String, Int] = Map("A" -> 10, "B" -> 20, "C" -> 15, "D" -> 20);
+
+    val maxValue = myMap.values.max;
+
+    val keyMax = myMap.filter {
+      case (_, value) => value == maxValue
+    }.keys
+
+    println("Given Map : ");
+    println(myMap);
+
+    println("Keys having maximum value:");
+    keyMax.foreach(println);
+  }
+}
+
+10) Write a Scala program to create a map and sort it by keys in ascending order.
+
+Sol)
+object Demo {
+  def main(args: Array[String]): Unit = {
+    val myMap : Map[String, Int] = Map("A" -> 10, "D" -> 20, "C" -> 15, "B" -> 20);
+    println("Initial Map : ");
+    println(myMap);
+
+    val sortedMap : Map[String, Int] = myMap.toSeq.sortBy(_._1).toMap;
+
+    println("Sorted Map based on Keys : ");
+    println(sortedMap);
+
+  }
+}

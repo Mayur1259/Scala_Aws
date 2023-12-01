@@ -1,0 +1,343 @@
+01/12/2023 -
+
+1) Think of as many ways as you can to make an Array[Int] that has the values 1-10 in it. 
+Write them all to test that they work. The first two should be easy. If you work you can get at least three others.
+
+Sol 1)
+import scala.io.StdIn._
+
+object demo {
+
+  def main(args: Array[String]): Unit = {
+    val arr1 : Array[Int] = Array(1,2,3,4,5,6,7,8,9,10);
+    println("By first method of array creation : ");
+    for (i <- arr1)
+      print(i + " ");
+    println();
+
+    val arr2: Array[Int] = new Array[Int](10)
+    arr2(0) = 1; arr2(1) = 2; arr2(2) = 3; arr2(3) = 4; arr2(4) = 5;
+    arr2(5) = 6; arr2(6) = 7; arr2(7) = 8; arr2(8) = 9; arr2(9) = 10
+    println("By second method of array creation : ")
+    for (i <- arr2)
+      print(i + " ");
+    println();
+
+    val arr3 : Array[Int] = (1 to 10).toArray;
+    println("By third method of array creation : ");
+    for (i <- arr3)
+      print(i + " ");
+    println();
+
+    val arr4 : Array[Int] = Array.tabulate(10)(_ + 1);
+    println("By fourth method of array creation : ");
+    for (i <- arr4)
+      print(i + " ");
+    println();
+
+    val arr5 : Array[Int] = new Array[Int](10);
+    println("By fifth method of array creation : ");
+    for(i <- 1 to 10)
+      arr5(i-1) = i;
+    for (i <- arr5)
+      print(i + " ");
+    println();
+
+  }
+
+}
+
+
+2) Make a List[Char] that contains ’a’-’z’ without typing in all the characters. (Use toChar to make this work.)
+
+Sol 2)
+object demo {
+  def main(args : Array[String]): Unit = {
+    
+    val lst : List[Char] = List.tabulate(26) {
+      num => (num + 97).toChar
+    }
+
+    println(lst);
+
+  }
+}
+
+
+3) Write a function that takes a number of values and returns the average excluding the largest and smallest values.
+
+Sol 3)
+import scala.io.StdIn._
+
+object demo {
+
+  def calcAvg(arr : Array[Int]) : Double = {
+    if(arr.length <= 2)
+      0.0;
+    else {
+      val maxEle = arr.max;
+      val minEle = arr.min;
+      var sum = 0;
+      var count = 0;
+      for(i <- arr) {
+        if(i != maxEle && i != minEle){
+          sum +=  i;
+          count += 1;
+        }
+      }
+      if(count == 0)
+        0.0;
+      else
+        sum.toDouble/count;
+
+    }
+  }
+
+  def main(args : Array[String]): Unit = {
+    println("Enter number of values : ");
+    val n = readInt();
+
+    println("Provide values : ");
+    val arr = Array.fill(n) {
+      readInt();
+    }
+
+    val res = calcAvg(arr);
+    println("Average of values excluding largest and smallest values : " + res);
+
+  }
+
+}
+
+
+4) Write a function that takes a sequence (List or Array) of grades and returns the average with the lowest two grades dropped. 
+Make sure this function behaves reasonably even for smaller input sets.
+
+Sol 4)
+import scala.io.StdIn.readInt
+
+object demo {
+
+  def calcAvg(arr : Array[Int]) : Double = {
+    if(arr.length <= 2)
+      0.0;
+    else {
+      val sort = arr.sorted;
+      val leftelements = sort.drop(2);
+
+      val sumElements = leftelements.sum;
+      val count = leftelements.length;
+
+      sumElements.toDouble/count.toDouble;
+
+    }
+  }
+
+  def main(args : Array[String]): Unit = {
+    println("Enter number of grades : ");
+    val n = readInt();
+
+    println("Provide grades : ");
+    val arr = Array.fill(n) {
+       readInt();
+    }
+
+    val average = calcAvg(arr);
+    println("Average with two lowest grades dropped is : " + average);
+
+  }
+
+}
+
+
+5) Write a script that reads in a number of integers between 1 and 100 and stores them in a list and then counts the number of times each number occurs.
+
+Sol 5)
+import scala.io.StdIn._
+
+object demo {
+
+  def main(args: Array[String]): Unit = {
+
+    println("Enter number of integers between 1 and 100 : ");
+    val n = readInt();
+
+    println("Enter integers : ");
+    val arr = Array.fill(n) {
+      readInt();
+    }
+
+    val myMap = scala.collection.mutable.Map[Int, Int]();
+
+    for (i <- arr) {
+      if (myMap.contains(i))
+        myMap(i) += 1;
+      else
+        myMap += (i -> 1);
+    }
+
+    myMap.foreach {
+      case(num, count) =>
+        println("Integer " + num + " occurs for " + count + " times.");
+    }
+
+  }
+  
+}
+
+
+6) Write a function that produces a sequence of prime numbers. The function should take an argument for how many prime numbers need to be in the list.
+
+Sol 6)
+import scala.collection.mutable.ArrayBuffer
+import scala.io.StdIn._
+
+object Demo {
+
+  def PrimeCheck(n : Int) : Boolean = {
+    if(n <= 1)
+      return false;
+
+    if(n == 2)
+      return true;
+
+    for(i <- 2 to n/2){
+      if(n % i == 0)
+        return false;
+    }
+
+    true
+
+  }
+
+def main (args : Array[String]): Unit = {
+    println("Enter number of prime numbers to be printed : ");
+    val n = readInt();
+    val primeNumbers = ArrayBuffer[Int]();
+
+    var p = 2;
+    while(primeNumbers.length < n){
+      if(PrimeCheck(p))
+        primeNumbers += p;
+      p += 1;
+    }
+
+    for(i <- primeNumbers)
+      print(i + " ");
+
+  }
+}
+
+
+7) Write a script that reads in a series of numbers from the user and stores them in a list. Then pass this list to a function that will remove all of the duplicates in the list. 
+Print out the list to make sure that all duplicates were removed.
+
+Sol 7)
+import scala.io.StdIn._
+
+object demo {
+
+  def removeDuplicates(l : List[Int]) : List[Int] = {
+    l.distinct;
+  }
+
+  def main(args: Array[String]): Unit = {
+
+    println("Enter series of numbers seperated by spaces : ");
+    val lst = readLine().split(" ").map(_.toInt).toList;
+
+    val finalList = removeDuplicates(lst);
+
+    println("Final list after removing duplicates is : ")
+    println(finalList);
+
+  }
+
+}
+
+
+8) Write a Scala program to create a set and find the common elements between two sets.
+
+Sol 8)
+import scala.io.StdIn._
+
+object Demo {
+  def main(args: Array[String]): Unit = {
+
+    println("Enter elements of 1st set seperated by spaces : ");
+    val s1 = readLine().split(" ").map(_.toInt).toSet;
+
+    println("Enter elements of 2nd set seperated by spaces : ");
+    val s2 = readLine().split(" ").map(_.toInt).toSet;
+
+    val comEle = s1.intersect(s2);
+
+    println("Common elements between the two sets : " + comEle);
+  }
+}
+
+
+9) Write a Scala program to create a set and find the second largest element in the set.
+
+Sol 9)
+import scala.io.StdIn._
+
+object Demo {
+  def main(args: Array[String]): Unit = {
+
+    println("Enter elements of a set seperated by spaces : ");
+    val set1 = readLine().split(" ").map(_.toInt).toSet;
+
+    println("Provided Set : " + set1);
+
+    if(set1.size < 2)
+      println("Set contains less than two elements.");
+    else {
+      val rS = set1.toList.sorted.reverse(1);
+      println("Second largest element of a set is : " + rS);
+    }
+
+  }
+}
+
+10) Write a Scala program to concatenate two tuples: (200, "Scala") and (300, "Exercises") should become ("Scala Exercises", 500).
+
+Sol 10)
+object Demo {
+  def main(args: Array[String]): Unit = {
+
+    val tuple1 = (200, "Scala")
+    val tuple2 = (300, "Exercises")
+    println("Tuple1 : " + tuple1);
+    println("Tuple2 : " + tuple2);
+
+    val combinedTuple = (tuple1._1 + tuple2._1, tuple1._2 + " " + tuple2._2);
+
+    println("Resultant Combined Tuple : " + combinedTuple);
+  }
+}
+
+
+11) Write a Scala program that checks if a tuple contains a specific element.
+
+Sol 11)
+import scala.io.StdIn._
+
+object Demo {
+  def main(args: Array[String]): Unit = {
+
+    val tuple = (3, 6, 4, 8, 9);
+    println("Tuple : " + tuple);
+
+    println("Enter element to check : ");
+    val element = readInt();
+
+    val checkElement = tuple.productIterator.contains(element);
+    if(checkElement){
+      println(element + " present in tuple.");
+    } else {
+      println(element + " not present in tuple.");
+    }
+
+  }
+}
